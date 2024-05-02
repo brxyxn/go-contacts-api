@@ -27,23 +27,25 @@ Rest API.
 <summary>Table of contents</summary>
 
 <!-- TOC -->
-  * [Getting Started](#getting-started)
+
+* [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
     * [Running the API](#running-the-api)
     * [Building the API](#building-the-api)
     * [Testing the API](#testing-the-api)
     * [Checking the Server](#checking-the-server)
-  * [Documentation](#documentation)
+* [Documentation](#documentation)
     * [Get all contacts](#get-all-contacts)
     * [Get a contact](#get-a-contact)
     * [Create a contact](#create-a-contact)
     * [Update a contact](#update-a-contact)
     * [Delete a contact](#delete-a-contact)
-  * [Tests](#tests)
-  * [API Design](#api-design)
+* [Tests](#tests)
+* [API Design](#api-design)
     * [Decisions](#decisions)
     * [Improvements](#improvements)
+
 <!-- TOC -->
 
 </details>
@@ -91,6 +93,10 @@ curl -X GET http://localhost:5000/status
 # {"status":"active"}
 ```
 
+---
+
+[Back to top](#getting-started)
+
 ## Documentation
 
 > Note: For documentation purposes, I prefer to use swagger in the first place.
@@ -134,6 +140,8 @@ DELETE /contacts/${id}
 
 ---
 
+[Back to top](#getting-started)
+
 ## Tests
 
 > Note: When running tests uncomment the following line in the `contacts.go` file in `/api/v1/contacts`.
@@ -164,22 +172,64 @@ ok      github.com/brxyxn/go-phonebook-api/pkg/logger           coverage: 100.0%
 
 ---
 
+[Back to top](#getting-started)
+
 ## API Design
 
 ### Decisions
 
-1. **net/http**: I decided to use the `net/http` package to create the API because it is a standard package in Go that allows me to create a server and handle requests and responses, it is also more than capable of holding the requirements of the challenge. Even though it allows me to create the server without any external dependencies, I decided to use Gorilla Mux as the router for the API.
-2. **Gorilla Mux**: I decided to use Gorilla Mux as the router for the API because it is a powerful and flexible router that allows me to define routes with variables and query parameters. It also has a good performance and is widely used in the Go community.
-3. **Response Models**: I decided to define a standard response format for the API that includes a status code, a message, an action, and a data field. This allows me to send consistent responses to the client and handle errors in a more structured way.
-4. **Response Handling**: I decided to create a helper function to handle the response to the client. This eventually could become a standard way to handle responses in the API across all endpoints and other services (microservices if applicable).
-5. **Logger**: I decided to use the `github.com/rs/zerolog` package to log information about the API to the console. This allows me to log information about the requests and responses and debug the API if needed. It is very flexible and allows me to log information in different formats and is very structured.
-6. **Environment Variables**: I decided to use environment variables to configure the API and implemented it with the library `github.com/joeshaw/envdecode` because it allows us to tag the struct using default values, which requires zero configuration when it's not provided. However, I'd use either JSON, YAML, or TOML files to store the configuration in a production environment if required.
+1. **net/http**: I decided to use the `net/http` package to create the API because it is a standard package in Go that
+   allows me to create a server and handle requests and responses, it is also more than capable of holding the
+   requirements of the challenge. Even though it allows me to create the server without any external dependencies, I
+   decided to use Gorilla Mux as the router for the API.
+2. **Gorilla Mux**: I decided to use Gorilla Mux as the router for the API because it is a powerful and flexible router
+   that allows me to define routes with variables and query parameters. It also has a good performance and is widely
+   used in the Go community.
+3. **Response Models**: I decided to define a standard response format for the API that includes a status code, a
+   message, an action, and a data field. This allows me to send consistent responses to the client and handle errors in
+   a more structured way.
+4. **Response Handling**: I decided to create a helper function to handle the response to the client. This eventually
+   could become a standard way to handle responses in the API across all endpoints and other services (microservices if
+   applicable).
+5. **Logger**: I decided to use the `github.com/rs/zerolog` package to log information about the API to the console.
+   This allows me to log information about the requests and responses and debug the API if needed. It is very flexible
+   and allows me to log information in different formats and is very structured.
+6. **Environment Variables**: I decided to use environment variables to configure the API and implemented it with the
+   library `github.com/joeshaw/envdecode` because it allows us to tag the struct using default values, which requires
+   zero configuration when it's not provided. However, I'd use either JSON, YAML, or TOML files to store the
+   configuration in a production environment if required.
+
+[Back to top](#getting-started)
 
 ### Improvements
 
-1. **Validation**: I would add validation to the request body and query parameters to ensure that the data is correct before processing it. This would help prevent errors and improve the reliability of the API.
-2. **Error Handling**: I would improve the error handling in the API to provide more detailed error messages to the client. This would help the client understand what went wrong and how to fix it.
-3. **Security**: I would add security features to the API to protect it from common attacks such as SQL injection, XSS, CSRF, etc. This would help prevent security breaches and protect the data of the users.
-4. **Testing**: I would add enough unit tests and integration tests to the API to ensure that it works as expected and that it can handle different scenarios. This would help prevent regressions and improve the quality of the API.
-5. **Observability**: I would add observability features to the API to monitor its performance and health. This would help detect issues early and improve the reliability of the API.
+1. **Validation**: I would add validation to the request body and query parameters to ensure that the data is correct
+   before processing it. This would help prevent errors and improve the reliability of the API.
+2. **Error Handling**: I would improve the error handling in the API to provide more detailed error messages to the
+   client. This would help the client understand what went wrong and how to fix it.
+3. **Security**: I would add security features to the API to protect it from common attacks such as SQL injection, XSS,
+   CSRF, etc. This would help prevent security breaches and protect the data of the users.
+4. **Testing**: I would add enough unit tests and integration tests to the API to ensure that it works as expected and
+   that it can handle different scenarios. This would help prevent regressions and improve the quality of the API.
+5. **Observability**: I would add observability features to the API to monitor its performance and health. This would
+   help detect issues early and improve the reliability of the API.
 
+---
+
+[Back to top](#getting-started)
+
+### Development
+
+Estimaded time:
+
+| Task          |    Time     |
+|---------------|:-----------:|
+| Development   |   2 hours   |
+| Testing       |   1 hour    |
+| Documentation |   1 hour    |
+|               |             |
+| **Total**     | **4 hours** |
+
+---
+
+[Back to top](#getting-started)
