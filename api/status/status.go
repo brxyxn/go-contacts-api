@@ -10,13 +10,11 @@ import (
 
 type Response struct {
 	Status string `json:"status"`
-	Error  string `json:"error,omitempty"`
 }
 
 func (c *Handlers) GetStatus(w http.ResponseWriter, r *http.Request) {
 	status := Response{
 		Status: "active",
-		Error:  "",
 	}
 
 	res, err := json.Marshal(status)
@@ -25,7 +23,7 @@ func (c *Handlers) GetStatus(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.Success(w, r, status, "success")
+	w = response.SetContentType(w, r, http.StatusOK)
 
 	_, err = w.Write(res)
 	if err != nil {

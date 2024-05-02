@@ -7,9 +7,9 @@ import (
 	"net/http"
 )
 
-// const contactsFile = "./api/v1/contacts/contacts.json"
+const contactsFile = "./api/v1/contacts/contacts.json"
 
-const contactsFile = "./contacts.json" // uncomment this line when running tests
+// const contactsFile = "./contacts.json" // uncomment this line when running tests
 
 const (
 	SuccessContacts = "contacts retrieved successfully"

@@ -23,7 +23,7 @@ type Response[T any] struct {
 	Action  string `json:"action,omitempty"`
 }
 
-func Success(w http.ResponseWriter, r *http.Request, data interface{}, message string) http.ResponseWriter {
+func Success(w http.ResponseWriter, r *http.Request, data interface{}, message string) {
 	response := Response[any]{
 		Data:    data,
 		Message: message,
@@ -32,16 +32,14 @@ func Success(w http.ResponseWriter, r *http.Request, data interface{}, message s
 
 	res, err := json.Marshal(response)
 	if err != nil {
-		return InternalError(w, r, ErrorInternalServer)
+		InternalError(w, r, ErrorInternalServer)
 	}
 
-	w = setContentType(w, r, http.StatusOK)
+	w = SetContentType(w, r, http.StatusOK)
 	_, err = w.Write(res)
 	if err != nil {
-		return InternalError(w, r, ErrorInternalServer)
+		InternalError(w, r, ErrorInternalServer)
 	}
-
-	return w
 }
 
 func Created(w http.ResponseWriter, r *http.Request, data interface{}, message string) {
@@ -56,7 +54,7 @@ func Created(w http.ResponseWriter, r *http.Request, data interface{}, message s
 		InternalError(w, r, ErrorInternalServer)
 	}
 
-	w = setContentType(w, r, http.StatusCreated)
+	w = SetContentType(w, r, http.StatusCreated)
 	_, err = w.Write(res)
 	if err != nil {
 		InternalError(w, r, ErrorInternalServer)
@@ -67,7 +65,7 @@ func Deleted(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func Error(w http.ResponseWriter, r *http.Request, error string) http.ResponseWriter {
+func Error(w http.ResponseWriter, r *http.Request, error string) {
 	response := Response[any]{
 		Data:    nil,
 		Message: error,
@@ -75,10 +73,10 @@ func Error(w http.ResponseWriter, r *http.Request, error string) http.ResponseWr
 	}
 	res, err := json.Marshal(response)
 	if err != nil {
-		return InternalError(w, r, ErrorInternalServer)
+		InternalError(w, r, ErrorInternalServer)
 	}
 
-	return returnError(w, r, http.StatusBadRequest, res)
+	returnError(w, r, http.StatusBadRequest, res)
 }
 
 func NotFound(w http.ResponseWriter, r *http.Request) {
@@ -96,28 +94,26 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 }
 
 func returnError(w http.ResponseWriter, r *http.Request, code int, response []byte) http.ResponseWriter {
-	w = setContentType(w, r, code)
+	w = SetContentType(w, r, code)
 	_, err := w.Write(response)
 	if err != nil {
-		return InternalError(w, r, ErrorInternalServer)
+		InternalError(w, r, ErrorInternalServer)
 	}
 
 	return w
 }
 
-func InternalError(w http.ResponseWriter, r *http.Request, data interface{}) http.ResponseWriter {
+func InternalError(w http.ResponseWriter, r *http.Request, data interface{}) {
 	response, _ := json.Marshal(data)
 
-	w = setContentType(w, r, http.StatusInternalServerError)
+	w = SetContentType(w, r, http.StatusInternalServerError)
 	_, err := w.Write(response)
 	if err != nil {
 		logger.Error(ErrorInternalServer, err.Error())
 	}
-
-	return w
 }
 
-func setContentType(w http.ResponseWriter, r *http.Request, code int) http.ResponseWriter {
+func SetContentType(w http.ResponseWriter, r *http.Request, code int) http.ResponseWriter {
 	w.Header().Set("Content-Type", contentType(r))
 	w.WriteHeader(code)
 	return w
