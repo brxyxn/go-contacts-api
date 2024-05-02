@@ -27,6 +27,13 @@ Rest API.
 <summary>Table of contents</summary>
 
 <!-- TOC -->
+  * [Getting Started](#getting-started)
+    * [Prerequisites](#prerequisites)
+    * [Installation](#installation)
+    * [Running the API](#running-the-api)
+    * [Building the API](#building-the-api)
+    * [Testing the API](#testing-the-api)
+    * [Checking the Server](#checking-the-server)
   * [Documentation](#documentation)
     * [Get all contacts](#get-all-contacts)
     * [Get a contact](#get-a-contact)
@@ -44,6 +51,45 @@ Rest API.
 <!-- badges -->
 
 ---
+
+## Getting Started
+
+### Prerequisites
+
+- [Go](https://golang.org/dl/)
+- [Postman](https://www.postman.com/downloads/) or
+- [Curl](https://curl.se/download.html)
+
+### Installation
+
+```bash
+git clone https://github.com/brxyxn/go-contacts-api && cd ./go-contacts-api
+```
+
+### Running the API
+
+```bash
+go run ./cmd/server/main.go
+```
+
+### Building the API
+
+```bash
+go build -o server ./cmd/server/main.go
+```
+
+### Testing the API
+
+```bash
+go test -v ./...
+```
+
+### Checking the Server
+
+```bash
+curl -X GET http://localhost:5000/status
+# {"status":"active"}
+```
 
 ## Documentation
 
