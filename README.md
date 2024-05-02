@@ -93,7 +93,7 @@ curl -X GET http://localhost:5000/status
 
 ## Documentation
 
-> Note: For documentation purposes I prefer to use swagger in the first place.
+> Note: For documentation purposes, I prefer to use swagger in the first place.
 
 There is a Postman collection that you can use to test the API. You can find it in the `docs` folder.
 
@@ -168,12 +168,12 @@ ok      github.com/brxyxn/go-phonebook-api/pkg/logger           coverage: 100.0%
 
 ### Decisions
 
-1. **net/http**: I decided to use the `net/http` package to create the API because it is a standard package in Go that allows me to create a server and handle requests and responses, it is also more than capable of holding the requirements of the challenge. Even thought it allows me to crerate the server without any external dependencies, I decided to use Gorilla Mux as the router for the API.
+1. **net/http**: I decided to use the `net/http` package to create the API because it is a standard package in Go that allows me to create a server and handle requests and responses, it is also more than capable of holding the requirements of the challenge. Even though it allows me to create the server without any external dependencies, I decided to use Gorilla Mux as the router for the API.
 2. **Gorilla Mux**: I decided to use Gorilla Mux as the router for the API because it is a powerful and flexible router that allows me to define routes with variables and query parameters. It also has a good performance and is widely used in the Go community.
 3. **Response Models**: I decided to define a standard response format for the API that includes a status code, a message, an action, and a data field. This allows me to send consistent responses to the client and handle errors in a more structured way.
 4. **Response Handling**: I decided to create a helper function to handle the response to the client. This eventually could become a standard way to handle responses in the API across all endpoints and other services (microservices if applicable).
-5. **Logger**: I decided to use the `github.com/rs/zerolog` package to log information about the API to the console. This allows me to log information about the requests and responses and debug the API if needed. It is very flexible and allows me to log information in different formats and very structured.
-6. **Environment Variables**: I decided to use environment variables to configure the API and implemented with the library `github.com/joeshaw/envdecode` because it allows us to tag the struct using default values, which requires zero configuarion when it's not provided. However, I'd use either JSON, YAML or TOML files to store the configuration in a production environment if required.
+5. **Logger**: I decided to use the `github.com/rs/zerolog` package to log information about the API to the console. This allows me to log information about the requests and responses and debug the API if needed. It is very flexible and allows me to log information in different formats and is very structured.
+6. **Environment Variables**: I decided to use environment variables to configure the API and implemented it with the library `github.com/joeshaw/envdecode` because it allows us to tag the struct using default values, which requires zero configuration when it's not provided. However, I'd use either JSON, YAML, or TOML files to store the configuration in a production environment if required.
 
 ### Improvements
 
